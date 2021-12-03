@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f0691a6b28c5047ae1d431553f9ec3, type: 3}
+  m_Name: Steel_Plate_Helmet
+  m_EditorClassIdentifier: 
+  equipSlot: 0
+  interactableType: 2
+  name: Worn Steel Plate Helmet
+  itemClass: 3
+  armorModifier: 2
+  damageModifier: 0
+  weight: 5
+  value: 95
+  isDefaultItem: 0
+  maleWardrobeRecipe: {fileID: 11400000, guid: f2087159ecc64d34287d991f85fa1a10, type: 2}
+  femaleWardrobeRecipe: {fileID: 11400000, guid: f28a6c49de60b084aaacb83440c7b4bf, type: 2}
