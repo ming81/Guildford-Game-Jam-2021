@@ -104,5 +104,6 @@ public class Interactable : MonoBehaviour
     }
 }
 
+public enum LetterNumber { one, two, three, four, five, six, seven, eight, nine, ten }
 public enum InteractableType { Chest, Light, Item, Door, Switch, Bed, Chair }
 

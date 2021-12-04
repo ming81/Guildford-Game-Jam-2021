@@ -16,11 +16,11 @@ MonoBehaviour:
   audioMixerGroup: {fileID: 24352844, guid: a63f18b704a1b874a8dad30baf0939e6, type: 2}
   TextureOrMaterialNames: []
   audioClips:
-  - {fileID: 8300000, guid: 375af61fe5c06774084832c408e31683, type: 3}
-  - {fileID: 8300000, guid: 229c64ed39310624c9aada3d771c7b06, type: 3}
-  - {fileID: 8300000, guid: 1f866668884214b4db7140d25b0def17, type: 3}
-  - {fileID: 8300000, guid: e5ae416f49602c1409e7c0d85ae0215c, type: 3}
-  - {fileID: 8300000, guid: 169f75c2c9f5fae4c9147639256eb0c8, type: 3}
+  - {fileID: 8300000, guid: 5cbf4dba6e3b40040938560663d850cc, type: 3}
+  - {fileID: 8300000, guid: 36b2a5a7f988c3a49a8dcb97c82f3055, type: 3}
+  - {fileID: 8300000, guid: 061f92917f3344e46a181210cd2be5f8, type: 3}
+  - {fileID: 8300000, guid: e6b69fa3aa7d71543b631e73a8d4edaa, type: 3}
+  - {fileID: 8300000, guid: 763ef6481f64ff044b076930e3e76ba2, type: 3}
   particleObject: {fileID: 135586, guid: 50016857087368141803f41af4837830, type: 3}
   useStepMark: 1
   stepMark: {fileID: 184202, guid: b8cf3efdf419ad74f8c0f66ab6418371, type: 3}
