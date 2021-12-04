@@ -12,10 +12,8 @@ public class CameraController : MonoBehaviour
     private float smoothSpeed = 0.25f;
     [SerializeField] private Vector3 mainCameraPos;
     private Vector3 velocity = Vector3.zero;
-    private PlayerControllerIK localPlayerController;
     [SerializeField] Camera mainCamera;
     public Vector3 desiredPosition;
-    private bool characterCreation;
 
     private void Start()
     {
@@ -31,7 +29,6 @@ public class CameraController : MonoBehaviour
 
     void SmoothCam()
     {
-        playerTransformTarget = localPlayerController.transform;
         desiredPosition = playerTransformTarget.position;
         transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref velocity, smoothSpeed);
 

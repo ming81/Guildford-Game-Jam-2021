@@ -138,9 +138,6 @@ namespace Bleak.Controller
 
         void Update()
         {
-            if (combatEnabled)
-                PlayerCombat();
-
             if (interactEnabled)
                 Interact();
 
@@ -148,93 +145,6 @@ namespace Bleak.Controller
                 HandleMovement();
 
             //  if (cameraEnabled) CameraLogic();
-        }
-
-        private void PlayerCombat()
-        {
-            if (Input.GetKeyDown(KeyCode.Z) && !weaponDrawn)
-            {
-                _anim.SetBool("weaponDrawn", true);
-                _anim.SetTrigger("unseathWeapon");
-                weaponDrawn = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.Z) && weaponDrawn)
-            {
-                _anim.SetBool("weaponDrawn", false);
-                _anim.SetTrigger("seathWeapon");
-                weaponDrawn = false;
-            }
-
-            if (EventSystem.current.IsPointerOverGameObject())
-                return;
-
-            if (Input.GetMouseButtonDown(0) && weaponDrawn && comboStep == 0)
-            {
-                _anim.Play("Attack1");
-                comboStep = 1;
-                return;
-            }
-            if (Input.GetMouseButtonDown(0) && weaponDrawn && comboStep != 0)
-            {
-                if (comboPossible)
-                {
-                    comboPossible = false;
-                    comboStep += 1;
-                }
-            }
-
-            if (Input.GetMouseButton(1) && weaponDrawn)
-            {
-                _anim.SetBool("isBlocking", true);
-                isBlocking = true;
-            }
-            else if (!Input.GetMouseButton(1) && isBlocking)
-            {
-                _anim.SetBool("isBlocking", false);
-                isBlocking = false;
-            }
-
-
-        }
-
-        public void ComboPossible()
-        {
-            comboPossible = true;
-        }
-
-        public void Combo()
-        {
-            if (comboStep == 2)
-                _anim.Play("Attack2");
-            if (comboStep == 3)
-                _anim.Play("Attack3");
-            if (comboStep == 4)
-                _anim.Play("Attack4");
-        }
-
-        public void ComboReset()
-        {
-            comboPossible = false;
-            comboStep = 0;
-        }
-
-        IEnumerator AttackTriggerReset(float time)
-        {
-            yield return new WaitForSeconds(time);
-            _anim.SetBool("IsAttacking", false);
-        }
-
-        void CharacterCreation(bool creationMode)
-        {
-            if (creationMode)
-            {
-                movementEnabled = false;
-
-            }
-            else if (!creationMode)
-            {
-                movementEnabled = true;
-            }
         }
 
         void Interact()
@@ -634,7 +544,7 @@ namespace Bleak.Controller
             Vector3 targetLookAt = transform.position +
                                    new Vector3(Mathf.Cos(_targetAngle) * 10, 0, Mathf.Sin(_targetAngle) * -10);
 
-            Transform headTransform = playerGfx.transform.Find("Root/Global/Position/Hips/LowerBack/Spine/Spine1/Neck/Head");
+            Transform headTransform = playerGfx.transform.Find("metarig/spine/spine.001/spine.002/spine.003/spine.004");
 
             targetLookAt.y = headTransform.position.y;
 
