@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         SmoothCam();
-        CameraRotate();
+        // CameraRotate();
     }
 
     void SmoothCam()

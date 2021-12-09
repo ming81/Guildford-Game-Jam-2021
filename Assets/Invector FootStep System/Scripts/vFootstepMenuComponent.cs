@@ -6,7 +6,8 @@ namespace Invector.vCharacterController
 {
     public partial class vMenuComponent
     {
-        [MenuItem("Invector/FootStep System/Add FootStep Component")]
+        /*
+        // [MenuItem("Invector/FootStep System/Add FootStep Component")]
         static void FootStepMenu()
         {
             if (Selection.activeGameObject)
@@ -15,10 +16,11 @@ namespace Invector.vCharacterController
                 Debug.Log("Please select a GameObject to add the component.");
         }
 
-        [MenuItem("Invector/FootStep System/Create New AudioSurface")]
+        // [MenuItem("Invector/FootStep System/Create New AudioSurface")]
         static void NewAudioSurface()
         {
             vScriptableObjectUtility.CreateAsset<vAudioSurface>();
-        }       
+        } 
+        */
     }
 }

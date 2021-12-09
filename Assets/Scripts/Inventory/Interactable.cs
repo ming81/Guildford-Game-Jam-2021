@@ -5,7 +5,11 @@ public class Interactable : MonoBehaviour
 {
     public float radius = 3f;
     public Transform interactionTransform;
-    public InteractableType interactableType;
+    public TaskCounter taskCounter;
+    public GameObject gameManager;
+    public string message;
+    public GameObject textPrefab;
+    public GameObject finishedGame;
 
     bool isFocus = false;
     public Transform player;
@@ -14,14 +18,59 @@ public class Interactable : MonoBehaviour
     public Animator _anim;
 
     bool hasInteracted = false;
+    public bool completed = false;
+    public bool destroyWhenPickedUp = true;
+    public bool isATask = true;
+    public bool interactBoat = false;
+
+    private void Start()
+    {
+
+    }
 
     public virtual void Interact()
     {
-        // This method is meant to be overwritten
+        ShowFloatingText();
+
+        if (interactBoat)
+        {
+            finishedGame.SetActive(true);
+        }
+
+        if (isATask)
+        {
+            if (!completed && !destroyWhenPickedUp)
+            {
+                taskCounter.CompleteTask();
+                completed = true;
+            }
+            else if (!completed && destroyWhenPickedUp)
+            {
+                taskCounter.CompleteTask();
+                completed = true;
+                Destroy(gameObject);
+            }
+        }
+        else if (!isATask)
+        {
+            if (destroyWhenPickedUp)
+                Destroy(gameObject);
+        }
     }
 
     void Update()
     {
+        if (player == null)
+        {
+            gameManager = GameObject.FindWithTag("GameManager");
+            taskCounter = gameManager.GetComponent<TaskCounter>();
+            playerObject = GameObject.FindWithTag("Player");
+            player = playerObject.transform;
+            playerControllerIK = playerObject.GetComponent<PlayerControllerIK>();
+            _anim = playerObject.GetComponent<Animator>();
+            textPrefab = (GameObject)Resources.Load("TextPrefabs/FloatingText", typeof(GameObject));
+        }
+
         if (isFocus && !hasInteracted)
         {
             float distance = Vector3.Distance(player.position, interactionTransform.position);
@@ -29,56 +78,15 @@ public class Interactable : MonoBehaviour
             {
                 Interact();
                 hasInteracted = true;
-
-                playerObject = player.gameObject;
-                playerControllerIK = playerObject.GetComponent<PlayerControllerIK>();
-                _anim = playerObject.GetComponent<Animator>();
-                bool sleeping = _anim.GetBool("Sleeping");
-
-                if (interactableType == InteractableType.Chest)
-                {
-                    _anim.SetTrigger("InteractChest");
-                }
-                if (interactableType == InteractableType.Door)
-                {
-                    _anim.SetTrigger("InteractDoor");
-                }
-                if (interactableType == InteractableType.Item)
-                {
-                    _anim.SetTrigger("InteractItem");
-                }
-                if (interactableType == InteractableType.Light)
-                {
-                    _anim.SetTrigger("InteractLight");
-                }
-                if (interactableType == InteractableType.Switch)
-                {
-                    _anim.SetTrigger("InteractSwitch");
-                }
-                if (interactableType == InteractableType.Bed)
-                {
-                    if (!sleeping)
-                    {
-                        _anim.SetBool("Sleeping", true);
-                        playerControllerIK.movementEnabled = false;
-                        playerControllerIK.combatEnabled = false;
-                        playerControllerIK.ikWeight = 0;
-                    }
-                    else if (sleeping)
-                    {
-                        _anim.SetBool("Sleeping", false);
-                        playerControllerIK.movementEnabled = true;
-                        playerControllerIK.combatEnabled = true;
-                        playerControllerIK.ikWeight = 1;
-                    }
-                }
-                if (interactableType == InteractableType.Chair)
-                {
-                    _anim.SetTrigger("InteractChair");
-                }
             }
         }
     }
+
+    public void ShowFloatingText()
+    {
+        var go = Instantiate(textPrefab, player.transform.position + new Vector3(0, 2.594f, 0), Quaternion.identity, player.transform);
+        go.GetComponent<TextMesh>().text = message;
+    } 
 
     public void OnFocused(Transform playerTransform)
     {
@@ -103,7 +111,3 @@ public class Interactable : MonoBehaviour
         Gizmos.DrawWireSphere(interactionTransform.position, radius);
     }
 }
-
-public enum LetterNumber { one, two, three, four, five, six, seven, eight, nine, ten }
-public enum InteractableType { Chest, Light, Item, Door, Switch, Bed, Chair }
-
